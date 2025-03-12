@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Tarjetas de Español</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1, h2, h3 {
+            color: #2a679f;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .input-section {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .preview-section {
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .flashcard {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .field {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        button {
+            background-color: #2a679f;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        button:hover {
+            background-color: #1d4e7c;
+        }
+        
+        .example-sentence {
+            font-style: italic;
+            margin-bottom: 8px;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .field-editable {
+            border: 1px solid #ddd;
+            padding: 8px;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            min-height: 20px;
+        }
+        
+        .field-label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #2a679f;
+        }
+        
+        #exportButton {
+            background-color: #28a745;
+        }
+        
+        #exportButton:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <h1>Generador de Tarjetas de Español</h1>
+    
+    <div class="container">
+        <div class="input-section">
+            <h2>Entrada</h2>
+            <div class="field">
+                <label for="wordInput">Palabra o Frase:</label>
+                <input type="text" id="wordInput" placeholder="Escribe una palabra o frase en español...">
+            </div>
+            
+            <button id="generateButton">Generar Tarjeta</button>
+        </div>
+        
+        <div class="loading" id="loadingIndicator">
+            <p>Generando tarjeta...</p>
+        </div>
+        
+        <div class="preview-section" id="previewSection" style="display: none;">
+            <h2>Vista Previa de la Tarjeta</h2>
+            
+            <div class="flashcard">
+                <div class="field">
+                    <div class="field-label">Palabra/Frase:</div>
+                    <div class="field-editable" id="palabra" contenteditable="true"></div>
+                </div>
+                
+                <div class="field">
+                    <div class="field-label">Pronunciación:</div>
+                    <div class="field-editable" id="pronunciacion" contenteditable="true"></div>
+                </div>
+                
+                <div class="field">
+                    <div class="field-label">Función:</div>
+                    <div class="field-editable" id="funcion" contenteditable="true"></div>
+                </div>
+                
+                <div class="field">
+                    <div class="field-label">Significado Principal:</div>
+                    <div class="field-editable" id="significado" contenteditable="true"></div>
+                </div>
+                
+                <div class="field">
+                    <div class="field-label">Sinónimos:</div>
+                    <div class="field-editable" id="sinonimos" contenteditable="true"></div>
+                </div>
+                
+                <div class="field">
+                    <div class="field-label">Frases de Ejemplo:</div>
+                    <div class="field-editable" id="ejemplos" contenteditable="true"></div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 20px;">
+                <button id="saveButton">Guardar Tarjeta</button>
+                <button id="exportButton">Exportar para Anki</button>
+            </div>
+        </div>
+        
+        <div id="savedCards" style="display: none;">
+            <h2>Tarjetas Guardadas</h2>
+            <div id="cardsList"></div>
+        </div>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>
